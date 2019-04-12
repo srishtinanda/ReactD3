@@ -5,12 +5,13 @@ import axios from 'axios';
 import * as denny from'../../fetch-data/data/denny.csv';
 import { dataManipulation } from '../../fetch-data/data-calculation/dataCalculation';
 // import { connect } from 'react-redux';
-class HighChart extends React.Component {
+
+class Denny extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        data: {}
+        denny: {}
     };
 }
   chart;
@@ -18,28 +19,25 @@ class HighChart extends React.Component {
     return (
       <div id="high-chart-container">
         wrk in progress!!!!
+        {this.check()}
       </div>
     );
   }
   componentDidMount() {
     this.getData();
-  }
-
-  getData =()=> {
     axios.get(`${denny}`)
-      .then((response) => this.dothisthing(response))
-      .catch(function (error) {
-        console.log(error);
-      });
-     this.chart = Highcharts.chart('high-chart-container', chartOptions);
-  }
-  dothisthing = (response) =>{
-    let data = dataManipulation(Object.values(response.data.split('\n')));
-    this.setState({
-      data: data
+    .then((response) => {
+      let data = dataManipulation(Object.values(response.data.split('\n')));
+      this.setState({
+        denny: data
+      })
+    this.chart.series[0].setData(Object.values(this.state.data));
+    })
+    .catch(function (error) {
+      console.log(error);
     });
-    this.chart.series[0].setData(Object.values(this.state.data).reverse());
+   this.chart = Highcharts.chart('high-chart-container', chartOptions);
   }
 }
 
-export default HighChart
+export default Denny;

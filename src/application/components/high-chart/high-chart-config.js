@@ -1,17 +1,12 @@
-import * as finalData from '../../data/dataCalculation';
-console.log(finalData,'shdgui3rhfigt4');
 export let chartOptions = {
   chart: {
       type: 'line'
   },
   title: {
-      text: 'Monthly Average Temperature'
-  },
-  subtitle: {
-      text: 'Source: WorldClimate.com'
+      text: 'Daily Average Hours Worked'
   },
   xAxis: {
-      categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+      type: 'datetime'
   },
   yAxis: {
       title: {
@@ -28,9 +23,7 @@ export let chartOptions = {
   },
   series: [{
       name: 'Denny',
-      data: []
-  }, {
-      name: 'London',
-      data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+      pointStart: Date.UTC(2018, 8, 1),
+      pointInterval: 24 * 3600 * 1000/2
   }]
 };
